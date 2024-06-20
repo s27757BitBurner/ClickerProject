@@ -20,7 +20,6 @@ class ClickerGameTest(TestCase):
         response = self.client.post('/click')
         self.assert200(response)
         self.assertEqual(response.json['score'], initial_score + 1)
-
         response = self.client.post('/click')
         self.assertEqual(response.json['score'], initial_score + 2)
 
