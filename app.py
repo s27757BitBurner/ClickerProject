@@ -3,7 +3,8 @@ from pymongo import MongoClient
 
 app = Flask(__name__)
 # MongoDB
-client = MongoClient('mongodb://localhost:27017/')
+mongo_uri = os.getenv('MONGO_URI', 'mongodb://mongo:27017/')
+client = MongoClient(mongo_uri)
 db = client.clicker_game
 scores_collection = db.scores
 
