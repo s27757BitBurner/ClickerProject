@@ -29,16 +29,62 @@
     </style>
 </head>
 <body>
+    <div>
+        <input type="text" id="username" placeholder="Enter username">
+        <button onclick="startGame()">Start Game</button>
+    </div>
     <div id="score">Score: 0</div>
-    <div id="click-area">Click me!</div>
+    <div id="click-area" style="display: none;">Click me!</div>
 
     <script>
+        let score = 0;
+        let username = '';
+
+        function startGame() {
+            username = document.getElementById('username').value;
+            if (username) {
+                fetch('/start', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username: username })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('score').innerText = 'Score: ' + data.score;
+                    document.getElementById('click-area').style.display = 'block';
+                });
+            }
+        }
+
         document.getElementById('click-area').addEventListener('click', function() {
             fetch('/click', { method: 'POST' })
                 .then(response => response.json())
                 .then(data => {
-                    document.getElementById('score').innerText = 'Score: ' + data.score;
+                    score = data.score;
+                    document.getElementById('score').innerText = 'Score: ' + score;
                 });
+        });
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Y' || event.key === 'y') {
+                fetch('/save', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({})
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message === 'Score saved') {
+                        alert('Score saved: ' + data.high_score);
+                    } else {
+                        alert('Error: ' + data.message);
+                    }
+                });
+            }
         });
     </script>
 </body>
