@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clicker Game</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+        }
+        #score {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        #click-area {
+            width: 100px;
+            height: 100px;
+            background-color: lightblue;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="score">Score: 0</div>
+    <div id="click-area">Click me!</div>
+
+    <script>
+        document.getElementById('click-area').addEventListener('click', function() {
+            fetch('/click', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('score').innerText = 'Score: ' + data.score;
+                });
+        });
+    </script>
+</body>
+</html>
