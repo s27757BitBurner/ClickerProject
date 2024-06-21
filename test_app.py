@@ -15,6 +15,7 @@ class ClickerGameTest(TestCase):
 
     def test_click_endpoint(self):
         global score
+        score = 0
         initial_score = score
 
         response = self.client.post('/click')
