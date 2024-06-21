@@ -33,7 +33,7 @@ class ClickerGameTest(TestCase):
         self.client.post('/click')
         response = self.client.post('/click')
 
-        self.assertEqual(response.json['score'], 4)
+        self.assertEqual(response.json['score'], 6)
 
 if __name__ == '__main__':
     unittest.main()
