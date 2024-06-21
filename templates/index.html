@@ -35,10 +35,12 @@
     </div>
     <div id="score">Score: 0</div>
     <div id="click-area" style="display: none;">Click me!</div>
+    <div><button onclick="save()">Save_Game</button> </div>
 
     <script>
         let score = 0;
         let username = '';
+
 
         function startGame() {
             username = document.getElementById('username').value;
@@ -86,6 +88,21 @@
                 });
             }
         });
+        function save() {
+            fetch('/save', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+            })
+            .catch(error => {
+                alert('Error saving game: ' + error.message);
+            });
+        }
     </script>
 </body>
 </html>
