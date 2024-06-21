@@ -20,7 +20,7 @@ jobs:
       - name: Run tests
         run: |
           python -m pytest test_app.py
-         working-directory: tests
+           working-directory: tests
 
       - name: Build Docker image
         run: docker build -t clicker_game:latest .
