@@ -19,7 +19,7 @@ jobs:
           python -m pip install pytest
       - name: Run tests
         run: |
-          python -m pytest pytest tests/test_app.py
+          python -m pytest tests/test_app.py
            working-directory: tests
 
       - name: Build Docker image
