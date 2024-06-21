@@ -24,4 +24,4 @@ jobs:
 
       - name: Build Docker image
         run: docker build -t clicker_game:latest .
-        # working-directory: docker
+        working-directory: .
