@@ -22,4 +22,4 @@ jobs:
           python -m pytest tests/test_app.py
 
       - name: Build Docker image
-        run: docker build -m clicker_game:latest
+        run: docker build -t clicker_game:latest
