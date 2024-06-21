@@ -23,5 +23,5 @@ jobs:
            working-directory: tests
 
       - name: Build Docker image
-        run: docker build -t clicker_game:latest .
+        run: docker build -m clicker_game:latest .
         working-directory: .
